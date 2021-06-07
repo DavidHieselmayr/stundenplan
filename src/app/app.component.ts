@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'stundenplan';
+  public title: string;
+  public rows: number;
+  public columns: number;
+  constructor() {
+    this.title = 'stundenplan';
+    // Zeile
+    this.rows = 5;
+    // Spalte
+    this.columns = 5;
+  }
 }
