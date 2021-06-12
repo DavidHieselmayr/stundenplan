@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Repository} from './repository';
 import {ESchoolclass} from './entity/ESchoolclass';
+import {EUnit} from './entity/EUnit';
+import {ETeacher} from './entity/ETeacher';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +11,11 @@ import {ESchoolclass} from './entity/ESchoolclass';
 })
 export class AppComponent implements OnInit {
   public title: string;
-  public rows: number;
-  public columns: number;
   public listofclasses: Array<ESchoolclass>;
+  public listofunitsserver: Array<EUnit>;
+  public listofteachers: Array<ETeacher>;
+  public column: Array<number> = [1, 2, 3, 4, 5];
+  public row: Array<number> = [1, 2, 3, 4, 5];
 
   constructor(private db: Repository) {
     this.db = db;
@@ -19,6 +23,33 @@ export class AppComponent implements OnInit {
     /*
     * Grund: CORS header 'AccessGrund: CORS-Kopfzeile 'Access-Control-Allow-Origin' fehlt
     * */
+    this.title = 'stundenplan';
+    this.listofunitsserver = [
+      {
+        id: 4,
+        day: 1,
+        unit: 3,
+        subject: 'INSY',
+        teacherID: 3,
+        schoolclassID: '5BHITM'
+      },
+      {
+        id: 5,
+        day: 1,
+        unit: 4,
+        subject: 'ITP',
+        teacherID: 3,
+        schoolclassID: '5BHITM'
+      },
+      {
+        id: 6,
+        day: 1,
+        unit: 5,
+        subject: 'ITP',
+        teacherID: 3,
+        schoolclassID: '5BHITM'
+      }
+    ];
     this.listofclasses = [
       {
         id: '3BHITM',
@@ -33,12 +64,28 @@ export class AppComponent implements OnInit {
         room: '135'
       }
     ];
-    this.title = 'stundenplan';
-    // Zeile
-    this.rows = 5;
-    // Spalte
-    this.columns = 5;
+    this.listofteachers = [
+      {
+        id: 1,
+        firstname: 'Gerald',
+        lastname: 'Aistleitner',
+        room: 'U12'
+      },
+      {
+        id: 2,
+        firstname: 'Herbert',
+        lastname: 'Lackinger',
+        room: '221'
+      },
+      {
+        id: 3,
+        firstname: 'Johannes',
+        lastname: 'Tumfahrt',
+        room: 'E42'
+      }
+    ];
   }
+
 
   ngOnInit(): void {
     console.log('ngOnInit');

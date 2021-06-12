@@ -21,3 +21,19 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+#table {
+  background-color: aqua;
+  height: 100%;
+  width: 100%;
+}
+
+.tablecontent {
+  background-color: brown;
+}
+
+.tablecontentcontent {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
