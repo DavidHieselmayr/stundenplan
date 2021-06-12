@@ -4,7 +4,7 @@
   <div id="studenplanbox">
     <div id="studenplanboxselection">
       <select>
-        <option>3BHITM</option>
+        <option *ngFor="let test of listofclasses">{{test.id}}</option>
 
       </select>
       <button>save</button>

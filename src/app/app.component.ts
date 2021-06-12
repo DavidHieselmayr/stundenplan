@@ -15,7 +15,24 @@ export class AppComponent implements OnInit {
 
   constructor(private db: Repository) {
     this.db = db;
-    this.listofclasses = [];
+    // TODO fix dg.getAllClasses
+    /*
+    * Grund: CORS header 'AccessGrund: CORS-Kopfzeile 'Access-Control-Allow-Origin' fehlt
+    * */
+    this.listofclasses = [
+      {
+        id: '3BHITM',
+        room: '137'
+      },
+      {
+        id: '4BHITM',
+        room: '136'
+      },
+      {
+        id: '5BHITM',
+        room: '135'
+      }
+    ];
     this.title = 'stundenplan';
     // Zeile
     this.rows = 5;
@@ -24,21 +41,13 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('ngOnInit');
+    /*
     this.db.getAllClasses().subscribe(
       (val) => {
-        console.log(val)
+        console.log(val);
         this.listofclasses = val;
       }
-    );
-  }
-
-  // @ts-ignore
-  getAllClasses(): Array<ESchoolclass> {
-    this.db.getAllClasses().subscribe(
-      (val) => {
-        return val;
-      }
-    );
-    return null;
+    );*/
   }
 }

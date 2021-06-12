@@ -12,9 +12,12 @@ export class Repository {
   constructor(private http: HttpClient) {
   }
 
-  // tslint:disable-next-line:typedef
   public getAllClasses(): Observable<any> {
     console.log('getAllClasses');
-    return this.http.get('http://localhost:8080/server/api/rest/class/findAll');
+    return this.http.get('http://localhost:8080/server/api/rest/class/findAll', {
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8'
+      }
+    });
   }
 }
