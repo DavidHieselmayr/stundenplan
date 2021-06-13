@@ -3,47 +3,61 @@
 
   <div id="studenplanbox">
     <div id="studenplanboxselection">
-      <select [(ngModel)]="currentschoolclass">
+      <select [(ngModel)]="currentschoolclass" (change)="getUnitsbyClassname()">
         <option name="currentschoolclassname"  *ngFor="let schoolclass of listofclasses">{{schoolclass.id}}</option>
       </select>
-      <button>save</button>
+      <button (click)="save()">save</button>
     </div>
     <div>
       <table id="table">
-        <tr>
-          <td></td>
-          <td>Montag</td>
-          <td>Dienstag</td>
-          <td>Mittwoch</td>
-          <td>Donnerstag</td>
-          <td>Freitag</td>
-        </tr>
-        <tr *ngFor="let i of column">
-          <td><b>{{i}}</b></td>
+         <tr>
+           <td></td>
+           <td><b>Montag</b></td>
+           <td><b>Dienstag</b></td>
+           <td><b>Mittwoch</b></td>
+           <td><b>Donnerstag</b></td>
+           <td><b>Freitag</b></td>
+         </tr>
+         <tr *ngFor="let i of column">
+           <td><b>{{i}}</b></td>
 
-          <td *ngFor="let f of row">
-            <!--{{f + 'f'}}-->
-            <div class="tablecontent" *ngFor="let unit of listofunitsserver">
-              <div class="tablecontentcontent" *ngIf="unit.day == f && unit.unit == i && unit.schoolclassID == currentschoolclass" >
-                {{unit.subject}}
-                <select>
-                  <option *ngFor="let teacher of listofteachers" [value]="teacher.id">
-                    {{teacher.firstname}}
-                  </option>
-                </select>
-              </div>
-            </div>
-          </td>
-          <!--<td *ngFor="let unit of listofunitsserver">
-            <p>{{unit.subject}}</p>
-            <select>
-              <option *ngFor="let teacher of listofteachers" [value]="teacher.id">
-                {{teacher.firstname}}
-              </option>
-            </select>
-          </td>-->
-        </tr>
-      </table>
+           <td *ngFor="let f of row">
+
+             <!--{{f + 'f'}}-->
+             <div class="tablecontent" *ngFor="let unit of listofunitsserver; let a = index">
+                 <div class="tablecontentcontent" *ngIf="unit.day == f && unit.unit == i && unit.schoolclassID == currentschoolclass" >
+                   <form>
+                     <input type="text" value="{{unit.subject}}">
+                   </form>
+                   <select>
+                     <option *ngFor="let teacher of listofteachers" [value]="teacher.id">
+                       {{teacher.firstname}}
+                     </option>
+                   </select>
+                 </div>
+               <div class="tablecontentcontent" *ngIf=" unit.unit != i && unit.schoolclassID != currentschoolclass">
+                 <form>
+                   <input type="text" value="frei">
+                 </form>
+                 <select>
+                   <option></option>
+                   <option *ngFor="let teacher of listofteachers" [value]="teacher.id">
+                     {{teacher.firstname}}
+                   </option>
+                 </select>
+               </div>
+             </div>
+           </td>
+           <!--td *ngFor="let unit of listofunitsserver">
+             <p>{{unit.subject}}</p>
+             <select>
+               <option *ngFor="let teacher of listofteachers" [value]="teacher.id">
+                 {{teacher.firstname}}
+               </option>
+             </select>
+           </td-->
+         </tr>
+       </table>
 
     </div>
   </div>

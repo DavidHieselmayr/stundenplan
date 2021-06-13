@@ -21,6 +21,8 @@ export class AppComponent implements OnInit {
   constructor(private db: Repository) {
     this.db = db;
     // TODO fix dg.getAllClasses
+    // TODO define standard schoolclass (select)
+    // TODO define correct teacher
     /*
     * Grund: CORS header 'AccessGrund: CORS-Kopfzeile 'Access-Control-Allow-Origin' fehlt
     * */
@@ -128,5 +130,13 @@ export class AppComponent implements OnInit {
         this.listofclasses = val;
       }
     );*/
+  }
+
+  save(): void {
+    console.log('save!');
+  }
+
+  getUnitsbyClassname(): void {
+    this.db.getUnitsbyClassname(this.currentschoolclass).subscribe((val) => this.listofunitsserver = val);
   }
 }

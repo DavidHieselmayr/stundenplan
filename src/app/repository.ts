@@ -20,4 +20,15 @@ export class Repository {
       }
     });
   }
+
+  getUnitsbyClassname(classname): Observable<any> {
+    console.log('getUnitbyClassname');
+    return this.http.get(`http://localhost:8080/server/api/rest/unit/findunitfromclassbyclassid/${classname}`, {
+      'headers': {
+        'Content-Type': 'application/json; charset=utf-8',
+      }, responseType: 'text'
+  }
+
+);
+}
 }
