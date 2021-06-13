@@ -19,14 +19,14 @@
           <th><b>Donnerstag</b></th>
           <th><b>Freitag</b></th>
         </tr>
-        <tr *ngFor="let i of column">
+        <tr *ngFor="let i of row">
           <td><b>{{i}}</b></td>
 
-          <td *ngFor="let f of row">
+          <td *ngFor="let f of column">
 
             <!--{{f + 'f'}}-->
             <div class="tablecontent">
-              <div class="testUnits" *ngIf="checkIfUnitExists(f, i)">
+              <div class="testUnits" *ngIf="checkIfUnitExists(i, f)">
 
                 <div class="tablecontentcontent">
                   <form>
@@ -39,7 +39,7 @@
                   </select>
                 </div>
               </div>
-              <div class="testUnitsFalse" *ngIf="checkIfUnitExists(f, i) == false">
+              <div class="testUnitsFalse" *ngIf="checkIfUnitExists(i, f) == false">
                 <form>
                   <input type="text" placeholder="frei">
                 </form>

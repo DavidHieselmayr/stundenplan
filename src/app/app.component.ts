@@ -19,8 +19,8 @@ export class AppComponent implements OnInit {
   public listofunitsserver: Array<EUnit>;
   public listof2dimensionalunits: EUnit[][];
   public listofteachers: Array<ETeacher>;
-  public column: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  public row: Array<number> = [1, 2, 3, 4, 5];
+  public column: Array<number> = [1, 2, 3, 4, 5];
+  public row: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   private dayNames: Array<string> = ['MON', 'TUE', 'WED', 'THU', 'FRI']
   private unitNumbers: Array<number> = [1, 2, 3, 4, 5];
 
