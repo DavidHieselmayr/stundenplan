@@ -11,6 +11,7 @@ import {ETeacher} from './entity/ETeacher';
 })
 export class AppComponent implements OnInit {
   public title: string;
+  public currentschoolclass: string;
   public listofclasses: Array<ESchoolclass>;
   public listofunitsserver: Array<EUnit>;
   public listofteachers: Array<ETeacher>;
@@ -48,7 +49,38 @@ export class AppComponent implements OnInit {
         subject: 'ITP',
         teacherID: 3,
         schoolclassID: '5BHITM'
-      }
+      },
+      {
+        id: 4,
+        day: 2,
+        unit: 3,
+        subject: 'INSY',
+        teacherID: 3,
+        schoolclassID: '5BHITM'
+      },
+      {
+        id: 4,
+        day: 3,
+        unit: 3,
+        subject: 'INSY',
+        teacherID: 3,
+        schoolclassID: '5BHITM'
+      },
+      {
+        id: 4,
+        day: 4,
+        unit: 3,
+        subject: 'INSY',
+        teacherID: 3,
+        schoolclassID: '5BHITM'
+      }, {
+        id: 4,
+        day: 5,
+        unit: 3,
+        subject: 'INSY',
+        teacherID: 3,
+        schoolclassID: '5BHITM'
+      },
     ];
     this.listofclasses = [
       {

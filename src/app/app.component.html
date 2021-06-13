@@ -3,20 +3,28 @@
 
   <div id="studenplanbox">
     <div id="studenplanboxselection">
-      <select>
-        <option *ngFor="let class of listofclasses">{{class.id}}</option>
-
+      <select [(ngModel)]="currentschoolclass">
+        <option name="currentschoolclassname"  *ngFor="let schoolclass of listofclasses">{{schoolclass.id}}</option>
       </select>
       <button>save</button>
     </div>
     <div>
       <table id="table">
+        <tr>
+          <td></td>
+          <td>Montag</td>
+          <td>Dienstag</td>
+          <td>Mittwoch</td>
+          <td>Donnerstag</td>
+          <td>Freitag</td>
+        </tr>
         <tr *ngFor="let i of column">
-          {{i + 'i'}}
+          <td><b>{{i}}</b></td>
+
           <td *ngFor="let f of row">
-            {{f + 'f'}}
+            <!--{{f + 'f'}}-->
             <div class="tablecontent" *ngFor="let unit of listofunitsserver">
-              <div class="tablecontentcontent" *ngIf="unit.day == i-1 && unit.unit == f-1">
+              <div class="tablecontentcontent" *ngIf="unit.day == f && unit.unit == i && unit.schoolclassID == currentschoolclass" >
                 {{unit.subject}}
                 <select>
                   <option *ngFor="let teacher of listofteachers" [value]="teacher.id">
@@ -25,7 +33,6 @@
                 </select>
               </div>
             </div>
-            {{f}}
           </td>
           <!--<td *ngFor="let unit of listofunitsserver">
             <p>{{unit.subject}}</p>

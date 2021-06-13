@@ -10,9 +10,7 @@
 }
 
 #studenplanbox {
-  background-color: bisque;
   width: 80%;
-
 }
 
 #studenplanboxselection {
@@ -23,17 +21,18 @@
 }
 
 #table {
-  background-color: aqua;
   height: 100%;
   width: 100%;
+  border-collapse: collapse;
 }
 
-.tablecontent {
-  background-color: brown;
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
 }
 
 .tablecontentcontent {
-  background-color: white;
   display: flex;
   flex-direction: column;
 }
