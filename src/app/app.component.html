@@ -3,7 +3,7 @@
 
   <div id="studenplanbox">
     <div id="studenplanboxselection">
-      <select [(ngModel)]="currentschoolclass" (change)="getUnitsbyClassname()">
+      <select [(ngModel)]="currentschoolclass" (change)="getUnitsbyClassname(currentschoolclass)">
         <option name="currentschoolclassname"  *ngFor="let schoolclass of listofclasses">{{schoolclass.id}}</option>
       </select>
       <button (click)="save()">save</button>
