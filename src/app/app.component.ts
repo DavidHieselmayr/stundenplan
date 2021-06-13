@@ -14,11 +14,15 @@ import {HttpClient} from '@angular/common/http';
 export class AppComponent implements OnInit {
   public title: string;
   public currentschoolclass: string;
+  public currentunit: EUnit;
   public listofclasses: Array<ESchoolclass>;
   public listofunitsserver: Array<EUnit>;
+  public listof2dimensionalunits: EUnit[][];
   public listofteachers: Array<ETeacher>;
-  public column: Array<number> = [1, 2, 3, 4, 5];
+  public column: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   public row: Array<number> = [1, 2, 3, 4, 5];
+  private dayNames: Array<string> = ['MON', 'TUE', 'WED', 'THU', 'FRI']
+  private unitNumbers: Array<number> = [1, 2, 3, 4, 5];
 
   constructor(private db: Repository, private http: HttpClient) {
     this.db = db;
@@ -125,6 +129,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('ngOnInit');
+    this.db.getAllClasses().subscribe((data: any[]) => {
+      this.listofclasses = data;
+    });
     /*
     this.db.getAllClasses().subscribe(
       (val) => {
@@ -134,15 +141,28 @@ export class AppComponent implements OnInit {
     );*/
   }
 
+  // tslint:disable-next-line:typedef
+  checkIfUnitExists(row, column) {
+    for (let unit of this.listofunitsserver) {
+      if (unit.day == column && unit.unit == row && unit.schoolclassID == this.currentschoolclass) {
+        this.currentunit = unit;
+        return true;
+      }
+    }
+    return false;
+  }
+
   save(): void {
     console.log('save!');
   }
 
   getUnitsbyClassname(classname): void {
     this.db.getClassUnitsById(classname).subscribe((data: any[]) => {
+      this.listofunitsserver = data;
       console.log('data: ' + data);
     });
   }
+
 
   /*
     getUnitsbyClassname(classname): void {

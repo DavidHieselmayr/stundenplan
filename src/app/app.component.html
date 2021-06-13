@@ -4,60 +4,65 @@
   <div id="studenplanbox">
     <div id="studenplanboxselection">
       <select [(ngModel)]="currentschoolclass" (change)="getUnitsbyClassname(currentschoolclass)">
-        <option name="currentschoolclassname"  *ngFor="let schoolclass of listofclasses">{{schoolclass.id}}</option>
+        <option name="currentschoolclassname" *ngFor="let schoolclass of listofclasses">{{schoolclass.id}}</option>
       </select>
       <button (click)="save()">save</button>
     </div>
     <div>
+
       <table id="table">
-         <tr>
-           <td></td>
-           <td><b>Montag</b></td>
-           <td><b>Dienstag</b></td>
-           <td><b>Mittwoch</b></td>
-           <td><b>Donnerstag</b></td>
-           <td><b>Freitag</b></td>
-         </tr>
-         <tr *ngFor="let i of column">
-           <td><b>{{i}}</b></td>
+        <tr>
+          <th></th>
+          <th><b>Montag</b></th>
+          <th><b>Dienstag</b></th>
+          <th><b>Mittwoch</b></th>
+          <th><b>Donnerstag</b></th>
+          <th><b>Freitag</b></th>
+        </tr>
+        <tr *ngFor="let i of column">
+          <td><b>{{i}}</b></td>
 
-           <td *ngFor="let f of row">
+          <td *ngFor="let f of row">
 
-             <!--{{f + 'f'}}-->
-             <div class="tablecontent" *ngFor="let unit of listofunitsserver; let a = index">
-                 <div class="tablecontentcontent" *ngIf="unit.day == f && unit.unit == i && unit.schoolclassID == currentschoolclass" >
-                   <form>
-                     <input type="text" value="{{unit.subject}}">
-                   </form>
-                   <select>
-                     <option *ngFor="let teacher of listofteachers" [value]="teacher.id">
-                       {{teacher.firstname}}
-                     </option>
-                   </select>
-                 </div>
-               <div class="tablecontentcontent" *ngIf=" unit.unit != i && unit.schoolclassID != currentschoolclass">
-                 <form>
-                   <input type="text" value="frei">
-                 </form>
-                 <select>
-                   <option></option>
-                   <option *ngFor="let teacher of listofteachers" [value]="teacher.id">
-                     {{teacher.firstname}}
-                   </option>
-                 </select>
-               </div>
-             </div>
-           </td>
-           <!--td *ngFor="let unit of listofunitsserver">
-             <p>{{unit.subject}}</p>
-             <select>
-               <option *ngFor="let teacher of listofteachers" [value]="teacher.id">
-                 {{teacher.firstname}}
-               </option>
-             </select>
-           </td-->
-         </tr>
-       </table>
+            <!--{{f + 'f'}}-->
+            <div class="tablecontent">
+              <div class="testUnits" *ngIf="checkIfUnitExists(f, i)">
+
+                <div class="tablecontentcontent">
+                  <form>
+                    <input type="text" value="{{this.currentunit.subject}}">
+                  </form>
+                  <select>
+                    <option *ngFor="let teacher of listofteachers" [value]="teacher.id">
+                      {{teacher.firstname}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="testUnitsFalse" *ngIf="checkIfUnitExists(f, i) == false">
+                <form>
+                  <input type="text" placeholder="frei">
+                </form>
+                <select>
+                  <option></option>
+                  <option *ngFor="let teacher of listofteachers" [value]="teacher.id">
+                    {{teacher.firstname}}
+                  </option>
+                </select>
+              </div>
+
+            </div>
+          </td>
+          <!--td *ngFor="let unit of listofunitsserver">
+            <p>{{unit.subject}}</p>
+            <select>
+              <option *ngFor="let teacher of listofteachers" [value]="teacher.id">
+                {{teacher.firstname}}
+              </option>
+            </select>
+          </td-->
+        </tr>
+      </table>
 
     </div>
   </div>
