@@ -1,0 +1,38 @@
+
+#wrapper {
+  padding: 10px 0px 0px 10px;
+  background-color: goldenrod;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+}
+
+#studenplanbox {
+  width: 80%;
+}
+
+#studenplanboxselection {
+  background-color: blueviolet;
+  min-width: 10%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#table {
+  height: 100%;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.tablecontentcontent {
+  display: flex;
+  flex-direction: column;
+}

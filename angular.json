@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "stundenplan"
+    }
+  },
+  "defaultProject": "stundenplan",
+  "cli": {
+    "analytics": false
+  }
 }
