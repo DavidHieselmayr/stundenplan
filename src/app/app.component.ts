@@ -21,19 +21,14 @@ export class AppComponent implements OnInit {
   public listofteachers: Array<ETeacher>;
   public column: Array<number> = [1, 2, 3, 4, 5];
   public row: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  private dayNames: Array<string> = ['MON', 'TUE', 'WED', 'THU', 'FRI']
-  private unitNumbers: Array<number> = [1, 2, 3, 4, 5];
 
   constructor(private db: Repository, private http: HttpClient) {
     this.db = db;
     // TODO fix dg.getAllClasses
     // TODO define standard schoolclass (select)
     // TODO define correct teacher
-    /*
-    * Grund: CORS header 'AccessGrund: CORS-Kopfzeile 'Access-Control-Allow-Origin' fehlt
-    * */
     this.title = 'stundenplan';
-    this.listofunitsserver = [
+    /*this.listofunitsserver = [
       {
         id: 4,
         day: 1,
@@ -123,33 +118,33 @@ export class AppComponent implements OnInit {
         lastname: 'Tumfahrt',
         room: 'E42'
       }
-    ];
+    ];*/
   }
 
 
   ngOnInit(): void {
     console.log('ngOnInit');
-    this.db.getAllClasses().subscribe((data: any[]) => {
-      this.listofclasses = data;
-    });
-    /*
     this.db.getAllClasses().subscribe(
       (val) => {
         console.log(val);
         this.listofclasses = val;
+        this.getUnitsbyClassname(this.currentschoolclass);
       }
-    );*/
+    );
   }
 
   // tslint:disable-next-line:typedef
   checkIfUnitExists(row, column) {
-    for (let unit of this.listofunitsserver) {
-      if (unit.day == column && unit.unit == row && unit.schoolclassID == this.currentschoolclass) {
-        this.currentunit = unit;
-        return true;
+    if (this.listofunitsserver != null) {
+      for (let unit of this.listofunitsserver) {
+        if (unit.day == column && unit.unit == row && unit.schoolclassID == this.currentschoolclass) {
+          this.currentunit = unit;
+          return true;
+        }
       }
+      return false;
     }
-    return false;
+
   }
 
   save(): void {
@@ -159,6 +154,7 @@ export class AppComponent implements OnInit {
   getUnitsbyClassname(classname): void {
     this.db.getClassUnitsById(classname).subscribe((data: any[]) => {
       this.listofunitsserver = data;
+      // tslint:disable-next-line:no-shadowed-variable
       console.log('data: ' + data);
     });
   }
