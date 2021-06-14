@@ -1,9 +1,9 @@
 
 #wrapper {
   padding: 10px 0px 0px 10px;
-  background-color: goldenrod;
+  background-color: #f9caa7;
   min-height: 100%;
-  width: 100%;
+  width: 99%;
   display: flex;
   flex-direction: column;
   align-items: baseline;
@@ -14,7 +14,6 @@
 }
 
 #studenplanboxselection {
-  background-color: blueviolet;
   min-width: 10%;
   display: flex;
   flex-wrap: wrap;
