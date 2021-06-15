@@ -22,5 +22,9 @@ export class Repository {
     return this.http.get(`http://localhost:8080/server/api/rest/unit/findunitfromclassbyclassid/${classname}`);
   }
 
+  public getAllTeachers(): Observable<any>{
+    console.log('getAllTeachers');
+    return this.http.get('http://localhost:8080/server/api/rest/teacher/findAll');
+  }
 
 }

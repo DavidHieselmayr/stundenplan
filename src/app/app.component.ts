@@ -32,6 +32,9 @@ export class AppComponent implements OnInit {
       (val) => {
         this.listofclasses = val;
         this.getUnitsbyClassname(this.currentschoolclass);
+        this.db.getAllTeachers().subscribe((data) => {
+          this.listofteachers = data;
+        });
       }
     );
   }
