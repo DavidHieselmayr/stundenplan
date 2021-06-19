@@ -26,29 +26,21 @@
 
             <!--{{f + 'f'}}-->
             <div class="tablecontent">
-              <div class="testUnits" *ngIf="checkIfUnitExists(i, f)">
-
-                <div class="tablecontentcontent">
-                  <form>
-                    <input type="text" value="{{this.currentunit.subject}}">
-                  </form>
-                  <select>
-                    <option *ngFor="let teacher of listofteachers" [value]="teacher.id">
-                      {{teacher.firstname}}
-                    </option>
+              <!-- <th>{{i == 0 ? '': i}}</th>
+             <th *ngFor="let d of days; index as j" [style.background-color]="getUnit(i, j).hasChanged ? 'red' : 'white'">
+               <input type="text" name="subject" [(ngModel)]="getUnit(i, j).subject" (input)="getUnit(i, j).hasChanged = true"><br>
+               <select name="teacher" [(ngModel)]="getUnit(i, j).teacherID" (change)="getUnit(i, j).hasChanged = true">
+                 <option *ngFor="let teacher of teachers" [value]="teacher.id">{{teacher.lastname}}</option>
+               </select>
+             </th>-->
+              <div class="testUnits" *ngIf="getUnit(i, f)">
+                <div class="tablecontentcontent" [style.background-color]="getUnit(i,f).haschanged ? 'red' : 'white'">
+                  <input name="subject" type="text" [(ngModel)]="getUnit(i,f).subject"
+                         (input)="getUnit(i,f).haschanged=true">
+                  <select name="teacher" [(ngModel)]="getUnit(i, f).teacherID" (change)="getUnit(i, f).haschanged = true">
+                    <option *ngFor="let teacher of listofteachers" [value]="teacher.id">{{teacher.lastname}}</option>
                   </select>
                 </div>
-              </div>
-              <div class="testUnitsFalse" *ngIf="checkIfUnitExists(i, f) == false">
-                <form>
-                  <input type="text" placeholder="frei">
-                </form>
-                <select>
-                  <option></option>
-                  <option *ngFor="let teacher of listofteachers" [value]="teacher.id">
-                    {{teacher.firstname}}
-                  </option>
-                </select>
               </div>
 
             </div>

@@ -13,8 +13,8 @@ import {HttpClient} from '@angular/common/http';
 
 export class AppComponent implements OnInit {
   public title: string;
-  public currentschoolclass: string;
-  public currentunit: EUnit;
+  // tslint:disable-next-line:ban-types
+  public currentschoolclass: String;
   public listofclasses: Array<ESchoolclass>;
   public listofunitsserver: Array<EUnit>;
   public listof2dimensionalunits: EUnit[][];
@@ -40,21 +40,31 @@ export class AppComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  checkIfUnitExists(row, column) {
+  getUnit(row, column): EUnit {
+    let currentUnit: EUnit;
     if (this.listofunitsserver != null) {
       for (const unit of this.listofunitsserver) {
         if (unit.day === column && unit.unit === row && unit.schoolclassID === this.currentschoolclass) {
-          this.currentunit = unit;
-          return true;
+          currentUnit = unit;
         }
       }
-      return false;
+
+      if (currentUnit === undefined) {
+        currentUnit = new EUnit(0, column, row, 'frei', 0, null, false);
+        this.listofunitsserver.push(currentUnit);
+      }
+      return currentUnit;
     }
 
   }
 
   save(): void {
-    console.log('save!');
+    for (const unit of this.listofunitsserver) {
+      if (unit.haschanged) {
+        console.log('save/haschanged!');
+        this.db.saveUnit(unit);
+      }
+    }
   }
 
   getUnitsbyClassname(classname): void {
@@ -65,18 +75,11 @@ export class AppComponent implements OnInit {
     });
   }
 
-
-  /*
-    getUnitsbyClassname(classname): void {
-      console.log('getUnitbyClassname');
-      this.http.get(`http://localhost:8080/server/api/rest/unit/findunitfromclassbyclassid/${classname}`, {
-          headers: {
-            'Content-Type': 'application/json; charset=utf-8',
-            'Access-Control-Allow-Origin': '*',
-          }, responseType: 'text'
-        }
-      ).subscribe((data) => {
-        console.log(data);
-      });
-    }*/
+  getTeacherWithId(id): string {
+    for (const teacher of this.listofteachers) {
+      if (teacher.id === id) {
+        return teacher.lastname;
+      }
+    }
+  }
 }

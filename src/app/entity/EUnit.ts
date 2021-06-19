@@ -5,7 +5,8 @@ export class EUnit {
     public unit: number,
     public subject: string,
     public teacherID: number,
-    public schoolclassID: string
+    public schoolclassID: string,
+    public haschanged: boolean
   ) {
   }
 }
