@@ -58,13 +58,15 @@ export class AppComponent implements OnInit {
 
   save(): void {
     for (const unit of this.listofunitsserver) {
-      if (unit.haschanged) {
+      if (unit.haschanged && unit.teacherID !== 0) {
         unit.schoolclassID = this.currentschoolclass.toString();
         console.log(this.currentschoolclass);
         console.log('save/haschanged!');
         this.db.saveUnit(unit).subscribe((data) => {
-          console.log(data);
+          this.getUnitsbyClassname(this.currentschoolclass);
         });
+      }else {
+        this.getUnitsbyClassname(this.currentschoolclass);
       }
     }
   }
