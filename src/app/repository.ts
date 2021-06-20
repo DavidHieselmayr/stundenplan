@@ -18,7 +18,6 @@ export class Repository {
   }
 
   public getAllSchoolClasses(): Observable<any> {
-    console.log('getAllClasses');
     return this.http.get(`${this.url}class/findAlL`);
   }
 
@@ -27,7 +26,6 @@ export class Repository {
   }
 
   public getAllTeachers(): Observable<any> {
-    console.log('getAllTeachers');
     return this.http.get(`${this.url}teacher/findAll`);
   }
 

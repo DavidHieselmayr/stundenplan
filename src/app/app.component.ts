@@ -60,8 +60,6 @@ export class AppComponent implements OnInit {
     for (const unit of this.listofunitsserver) {
       if (unit.haschanged && unit.teacherID !== 0) {
         unit.schoolclassID = this.currentschoolclass.toString();
-        console.log(this.currentschoolclass);
-        console.log('save/haschanged!');
         this.db.saveUnit(unit).subscribe((data) => {
           this.getUnitsbyClassname(this.currentschoolclass);
         });
@@ -75,7 +73,6 @@ export class AppComponent implements OnInit {
     this.db.getClassUnitsById(classname).subscribe((data: any[]) => {
       this.listofunitsserver = data;
       // tslint:disable-next-line:no-shadowed-variable
-      console.log('data: ' + data);
     });
   }
 
