@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ESchoolclass} from './entity/ESchoolclass';
 import {Observable} from 'rxjs';
-import {EUnit} from './entity/EUnit';
+import {EUnit, EUnitBackend} from './entity/EUnit';
 
 
 const httpOptions = {
@@ -32,6 +32,7 @@ export class Repository {
   }
 
   public saveUnit(unit: EUnit): Observable<any> {
-    return this.http.put(`${this.url}teacher/findAll`, unit, {responseType: 'json'});
+    // tslint:disable-next-line:max-line-length
+    return this.http.put(`${this.url}unit/save`, new EUnitBackend(unit.id, unit.day, unit.unit, unit.subject, unit.teacherID, unit.schoolclassID), {responseType: 'json'});
   }
 }

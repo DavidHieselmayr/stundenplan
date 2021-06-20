@@ -52,6 +52,7 @@ export class AppComponent implements OnInit {
       if (currentUnit === undefined) {
         currentUnit = new EUnit(0, column, row, 'frei', 0, null, false);
         this.listofunitsserver.push(currentUnit);
+        console.log('currentUnit === undefined');
       }
       return currentUnit;
     }
@@ -62,7 +63,9 @@ export class AppComponent implements OnInit {
     for (const unit of this.listofunitsserver) {
       if (unit.haschanged) {
         console.log('save/haschanged!');
-        this.db.saveUnit(unit);
+        this.db.saveUnit(unit).subscribe((data) => {
+          console.log(data);
+        });
       }
     }
   }
