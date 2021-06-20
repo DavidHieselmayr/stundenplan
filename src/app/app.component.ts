@@ -15,12 +15,11 @@ export class AppComponent implements OnInit {
   public title: string;
   // tslint:disable-next-line:ban-types
   public currentschoolclass: String;
-  public listofclasses: Array<ESchoolclass>;
+  public listofschoolclasses: Array<ESchoolclass>;
   public listofunitsserver: Array<EUnit>;
-  public listof2dimensionalunits: EUnit[][];
   public listofteachers: Array<ETeacher>;
-  public column: Array<number> = [1, 2, 3, 4, 5];
-  public row: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  public days: Array<string> = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag'];
+  public hours: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   constructor(private db: Repository, private http: HttpClient) {
     this.db = db;
@@ -28,40 +27,40 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.db.getAllClasses().subscribe(
-      (val) => {
-        this.listofclasses = val;
-        this.getUnitsbyClassname(this.currentschoolclass);
-        this.db.getAllTeachers().subscribe((data) => {
-          this.listofteachers = data;
-        });
-      }
-    );
+    this.loadData();
+  }
+
+  loadData(): void {
+    this.db.getAllTeachers().subscribe((data) => {
+      this.listofteachers = data;
+    });
+    this.db.getAllSchoolClasses().subscribe((data) => {
+      this.listofschoolclasses = data;
+      this.currentschoolclass = this.listofschoolclasses[0].id;
+      this.getUnitsbyClassname(this.currentschoolclass);
+    });
   }
 
   // tslint:disable-next-line:typedef
-  getUnit(row, column): EUnit {
-    let currentUnit: EUnit;
-    if (this.listofunitsserver != null) {
-      for (const unit of this.listofunitsserver) {
-        if (unit.day === column && unit.unit === row && unit.schoolclassID === this.currentschoolclass) {
-          currentUnit = unit;
-        }
+  getUnit(hour: number, i: number): EUnit {
+    let dummy: EUnit;
+    for (const unit of this.listofunitsserver) {
+      if (unit.day === i && unit.unit === hour) {
+        dummy = unit;
       }
-
-      if (currentUnit === undefined) {
-        currentUnit = new EUnit(0, column, row, 'frei', 0, null, false);
-        this.listofunitsserver.push(currentUnit);
-        console.log('currentUnit === undefined');
-      }
-      return currentUnit;
     }
-
+    if (dummy === undefined) {
+      dummy = new EUnit(0, i, hour, 'freiheit', 0, null, null);
+      this.listofunitsserver.push(dummy);
+    }
+    return dummy;
   }
 
   save(): void {
     for (const unit of this.listofunitsserver) {
       if (unit.haschanged) {
+        unit.schoolclassID = this.currentschoolclass.toString();
+        console.log(this.currentschoolclass);
         console.log('save/haschanged!');
         this.db.saveUnit(unit).subscribe((data) => {
           console.log(data);

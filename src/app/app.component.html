@@ -1,10 +1,10 @@
 <div id="wrapper">
-  <h2>{{title}}</h2>
+  <h1>{{title}}</h1>
 
   <div id="studenplanbox">
     <div id="studenplanboxselection">
-      <select [(ngModel)]="currentschoolclass" (change)="getUnitsbyClassname(currentschoolclass)">
-        <option name="currentschoolclassname" *ngFor="let schoolclass of listofclasses">{{schoolclass.id}}</option>
+      <select name="schoolclass" [(ngModel)]="currentschoolclass" (change)="getUnitsbyClassname(currentschoolclass)">
+        <option *ngFor="let schoolclass of listofschoolclasses">{{schoolclass.id}}</option>
       </select>
       <button (click)="save()">save</button>
     </div>
@@ -13,27 +13,21 @@
       <table id="table">
         <tr>
           <th></th>
-          <th><b>Montag</b></th>
-          <th><b>Dienstag</b></th>
-          <th><b>Mittwoch</b></th>
-          <th><b>Donnerstag</b></th>
-          <th><b>Freitag</b></th>
+          <th *ngFor="let day of days">{{day}}</th>
         </tr>
-        <tr *ngFor="let i of row">
-          <td><b>{{i}}</b></td>
-
-          <td *ngFor="let f of column">
-            <div class="tablecontent">
-                <div class="tablecontentcontent" [style.background-color]="getUnit(i,f).haschanged ? 'red' : 'white'">
-                  <input name="subject" type="text" [(ngModel)]="getUnit(i,f).subject"
-                         (input)="getUnit(i,f).haschanged=true">
-                  <select name="teacher" [(ngModel)]="getUnit(i, f).teacherID"
-                          (change)="getUnit(i, f).haschanged = true">
-                    <option *ngFor="let teacher of listofteachers" [value]="teacher.id">{{teacher.lastname}}</option>
-                  </select>
-                </div>
-            </div>
-          </td>
+        <tr *ngFor="let hour of hours">
+          <th>{{hour}}</th>
+          <th *ngFor="let f of days; index as i"
+              [style.background-color]="getUnit(hour, i).haschanged ? 'red' : 'white'">
+            <input name="subject" type="text" [(ngModel)]="getUnit(hour, i).subject"
+                   (input)="getUnit(hour, i).haschanged = true">
+            <select name="teacher" [(ngModel)]="getUnit(hour, i).teacherID"
+                    (change)="getUnit(hour,i).haschanged = true">
+              <option *ngFor="let teacher of listofteachers" [value]="teacher.id">
+                {{teacher.lastname}}
+              </option>
+            </select>
+          </th>
         </tr>
       </table>
     </div>

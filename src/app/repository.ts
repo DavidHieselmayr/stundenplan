@@ -17,7 +17,7 @@ export class Repository {
   constructor(private http: HttpClient) {
   }
 
-  public getAllClasses(): Observable<any> {
+  public getAllSchoolClasses(): Observable<any> {
     console.log('getAllClasses');
     return this.http.get(`${this.url}class/findAlL`);
   }
@@ -33,6 +33,7 @@ export class Repository {
 
   public saveUnit(unit: EUnit): Observable<any> {
     // tslint:disable-next-line:max-line-length
-    return this.http.put(`${this.url}unit/save`, new EUnitBackend(unit.id, unit.day, unit.unit, unit.subject, unit.teacherID, unit.schoolclassID), {responseType: 'json'});
+    const dummy = new EUnitBackend(unit.id, unit.day, unit.unit, unit.subject, unit.teacherID, unit.schoolclassID);
+    return this.http.put(`${this.url}unit/save`, dummy, {responseType: 'json'});
   }
 }
